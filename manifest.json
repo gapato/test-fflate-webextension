@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "test-fflate",
+  "version": "0.1.0",
+  "description": "test-fflate",
+  "host_permissions": [
+    "https://gapato.github.io/test-fflate-webextension/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gapato.github.io/test-fflate-webextension/"
+      ],
+      "js": [
+        "fflate.min.js",
+        "common.js",
+        "content.js"
+      ]
+    }
+  ]
+}

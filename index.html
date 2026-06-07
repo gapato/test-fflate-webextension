@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>test fflate</title>
+    <script src="fflate.min.js"></script>
+    <script src="common.js"></script>
+  </head>
+  <body>
+    <div id="container1">
+      <label for="selector1">Zip with page script:</label>
+      <input id="selector1" type="file" webkitdirectory>
+      <button id="btn1" disabled title="Script not loaded">zip</button>
+    </div>
+
+    <div id="container2">
+      <label for="selector2">Zip with extension:</label>
+      <input id="selector2" type="file" webkitdirectory>
+      <button id="btn2" disabled title="Extension not loaded">zip</button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
