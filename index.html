@@ -8,16 +8,17 @@
     <script src="common.js"></script>
   </head>
   <body>
+    <input id="selector" type="file" webkitdirectory>
     <div id="container1">
-      <label for="selector1">Zip with page script:</label>
-      <input id="selector1" type="file" webkitdirectory>
+      <label for="btn1">Zip with page script:</label>
       <button id="btn1" disabled title="Script not loaded">zip</button>
+      <span id="status1"></span>
     </div>
 
     <div id="container2">
-      <label for="selector2">Zip with extension:</label>
-      <input id="selector2" type="file" webkitdirectory>
+      <label for="btn2">Zip with extension:</label>
       <button id="btn2" disabled title="Extension not loaded">zip</button>
+      <span id="status2"></span>
     </div>
     <script src="main.js"></script>
   </body>

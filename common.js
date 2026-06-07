@@ -12,7 +12,7 @@ const download = (file, name) => {
 const install = (n) => {
   const btn = document.querySelector(`#btn${n}`)
   btn.addEventListener("click", () => {
-    const files = document.querySelector(`#selector${n}`).files
+    const files = document.querySelector(`#selector`).files
 
     const zipObj = {}
     const promises = []
@@ -31,8 +31,12 @@ const install = (n) => {
 
       fflate.zip(zipObj, { level: 0 }, (err, data) => {
         const end = new Date()
-        console.log(err)
-        document.querySelector(`#container${n}`).append(`done in ${end - start} ms`)
+        const status = document.querySelector(`#status${n}`)
+        if (err != null) {
+          status.textContent = "[error]"
+        } else {
+          status.textContent = `done in ${end - start} ms`
+        }
         download(data, "test.zip")
       })
     })
