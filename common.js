@@ -10,7 +10,9 @@ const download = (file, name) => {
 }
 
 const install = (n, patched=false) => {
-  const btn = document.querySelector(`#btn${n}`)
+  Notification.requestPermission()
+  const container = document.querySelector(`#container${n}`)
+  const btn = container.querySelector(`.btn`)
   btn.addEventListener("click", () => {
     const files = document.querySelector(`#selector`).files
 
@@ -33,17 +35,24 @@ const install = (n, patched=false) => {
 
       ff.zip(zipObj, { level: 0 }, (err, data) => {
         const end = new Date()
-        const status = document.querySelector(`#status${n}`)
+        const statusSpan = container.querySelector(`.status`)
         if (err != null) {
-          status.textContent = "[error]"
+          statusSpan.textContent = "[error]"
         } else {
-          status.textContent = `done in ${end - start} ms`
+          statusSpan.textContent = `done in ${end - start} ms`
+
+          if (Notification.permission === "granted") {
+            new Notification("Zipped data is ready for download")
+          }
+
+          const downloadBtn = document.createElement("button")
+          downloadBtn.textContent = "download"
+          downloadBtn.addEventListener("click", () => {download(data, "test.zip")})
+          container.querySelector(".download")?.replaceChildren(downloadBtn)
         }
-        download(data, "test.zip")
       })
     })
   })
   btn.disabled = false
   btn.title = ""
-  console.log(`adding listener on btn${n}...`)
 }
