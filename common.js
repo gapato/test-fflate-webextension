@@ -14,6 +14,9 @@ const install = (n) => {
   const container = document.querySelector(`#container${n}`)
   const btn = container.querySelector(`.btn`)
   btn.addEventListener("click", () => {
+    btn.disabled = true
+    btn.textContent = "running..."
+
     const files = document.querySelector(`#selector`).files
 
     const zipObj = {}
@@ -27,9 +30,8 @@ const install = (n) => {
     }
 
     Promise.all(promises).then(() => {
-      const start = new Date()
 
-      console.log(zipObj)
+      const start = new Date()
 
       fflate.zip(zipObj, { level: 0 }, (err, data) => {
         const end = new Date()
