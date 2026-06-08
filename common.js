@@ -9,7 +9,7 @@ const download = (file, name) => {
   URL.revokeObjectURL(url);
 }
 
-const install = (n, patched=false) => {
+const install = (n) => {
   Notification.requestPermission()
   const container = document.querySelector(`#container${n}`)
   const btn = container.querySelector(`.btn`)
@@ -31,9 +31,7 @@ const install = (n, patched=false) => {
 
       console.log(zipObj)
 
-      const ff = patched ? fflate_patched : fflate;
-
-      ff.zip(zipObj, { level: 0 }, (err, data) => {
+      fflate.zip(zipObj, { level: 0 }, (err, data) => {
         const end = new Date()
         const statusSpan = container.querySelector(`.status`)
         if (err != null) {
