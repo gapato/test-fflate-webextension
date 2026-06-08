@@ -1,4 +1,4 @@
 "use strict";
 
 install(1)
-install(2, patched=true)
+install(2, true)
