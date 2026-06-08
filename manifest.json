@@ -13,8 +13,7 @@
         "https://gapato.github.io/test-fflate-webextension/"
       ],
       "js": [
-        "fflate.min.js",
-        "fflate_patched.js",
+        "fflate.js",
         "common.js",
         "content.js"
       ]

@@ -2333,7 +2333,10 @@ function zipSync(data, opts) {
             err(11);
         var d = compression ? deflateSync(file, p) : file, l = d.length;
         var c = crc();
+        const startTime = new Date();
         c.p(file);
+        const endTime = new Date();
+        console.log(`CRC took ${endTime - startTime} ms`)
         files.push(mrg(p, {
             size: file.length,
             crc: c.d(),
