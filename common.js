@@ -9,7 +9,7 @@ const download = (file, name) => {
   URL.revokeObjectURL(url);
 }
 
-const install = (n) => {
+const install = (n, useAsync=true) => {
   Notification.requestPermission()
   const container = document.querySelector(`#container${n}`)
   const btn = container.querySelector(`.btn`)
@@ -33,24 +33,31 @@ const install = (n) => {
 
       const start = new Date()
 
-      fflate.zip(zipObj, { level: 0 }, (err, data) => {
-        const end = new Date()
-        const statusSpan = container.querySelector(`.status`)
-        if (err != null) {
-          statusSpan.textContent = "[error]"
-        } else {
-          statusSpan.textContent = `done in ${end - start} ms`
+      const callback = (err, data) => {
+          const end = new Date()
+          const statusSpan = container.querySelector(`.status`)
+          if (err != null) {
+            statusSpan.textContent = "[error]"
+          } else {
+            statusSpan.textContent = `done in ${end - start} ms`
 
-          if (Notification.permission === "granted") {
-            new Notification("Zipped data is ready for download")
+            if (Notification.permission === "granted") {
+              new Notification("Zipped data is ready for download")
+            }
+
+            const downloadBtn = document.createElement("button")
+            downloadBtn.textContent = "download"
+            downloadBtn.addEventListener("click", () => {download(data, "test.zip")})
+            container.querySelector(".download")?.replaceChildren(downloadBtn)
           }
-
-          const downloadBtn = document.createElement("button")
-          downloadBtn.textContent = "download"
-          downloadBtn.addEventListener("click", () => {download(data, "test.zip")})
-          container.querySelector(".download")?.replaceChildren(downloadBtn)
         }
-      })
+
+      if (useAsync) {
+        fflate.zip(zipObj, { level: 0 }, callback)
+      } else {
+        const data = fflate.zipSync(zipObj, { level: 0 })
+        callback(null, data)
+      }
     })
   })
   btn.disabled = false

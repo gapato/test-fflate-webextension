@@ -1,3 +1,4 @@
 "use strict";
 
-install(2)
+install(3)
+install(4, false)
