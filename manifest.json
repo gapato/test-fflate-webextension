@@ -13,6 +13,7 @@
       ],
       "js": [
         "fflate.min.js",
+        "fflate_patched.js",
         "common.js",
         "content.js"
       ]

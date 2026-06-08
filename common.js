@@ -9,7 +9,7 @@ const download = (file, name) => {
   URL.revokeObjectURL(url);
 }
 
-const install = (n) => {
+const install = (n, patched=false) => {
   const btn = document.querySelector(`#btn${n}`)
   btn.addEventListener("click", () => {
     const files = document.querySelector(`#selector`).files
@@ -29,7 +29,9 @@ const install = (n) => {
 
       console.log(zipObj)
 
-      fflate.zip(zipObj, { level: 0 }, (err, data) => {
+      const ff = patched ? fflate_patched : fflate;
+
+      ff.zip(zipObj, { level: 0 }, (err, data) => {
         const end = new Date()
         const status = document.querySelector(`#status${n}`)
         if (err != null) {
